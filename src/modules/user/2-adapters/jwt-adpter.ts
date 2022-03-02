@@ -7,8 +7,8 @@ import { Decrypter } from './ports/decrypter'
 export class JwtAdapter implements Encrypter, Decrypter {
   constructor (private readonly secret: string) {}
 
-  async encrypt (plaintext: string): Promise<string> {
-    return jwt.sign({ id: plaintext }, this.secret)
+  async encrypt (payload: any): Promise<string> {
+    return jwt.sign(payload, this.secret, { expiresIn: '24h' })
   }
 
   async decrypt (ciphertext: string): Promise<string> {

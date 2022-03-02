@@ -1,6 +1,7 @@
-export class ServerError extends Error implements ControllerError {
-  constructor (reason: string) {
-    super('Server error: ' + reason + '.')
+export class ServerError extends Error {
+  constructor (stack: string) {
+    super('Internal server error')
     this.name = 'ServerError'
+    this.stack = stack
   }
 }

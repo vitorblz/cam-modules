@@ -12,9 +12,16 @@ export class UserMongoRepo implements UserRepository {
     }
 
     async loadByLogin (login: string): Promise<IUser> {
-        const user = await UsersModel.findOne({ login }).exec();
-        console.log(user);
+        const user = await UsersModel.findOne({ login })
+        .lean()
+        .exec()
+        
         return user;
+    }
+
+    async findAll (): Promise<IUser[]> {
+        const allUsers = await UsersModel.find();
+        return allUsers;
     }
 
 }
